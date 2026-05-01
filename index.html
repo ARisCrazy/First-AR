@@ -22,10 +22,22 @@
     >
 
       <a-assets>
-        <a-asset-item
-          id="watch"
-          src="./assets/apple_watch_ultra_2.glb">
-        </a-asset-item>
+        <a-asset-item id="apple"
+    src="./assets/apple_watch_ultra_2.glb">
+  </a-asset-item>
+
+  <a-asset-item id="casio"
+    src="./assets/casio_watch.glb">
+  </a-asset-item>
+
+  <a-asset-item id="rolex"
+    src="./assets/wrist_watch.glb">
+  </a-asset-item>
+
+  <a-asset-item id="tissot"
+    src="./assets/watch_tissot_t-race_motogp_limited_edition_sdc.glb">
+  </a-asset-item>
+        
       </a-assets>
 
       <a-camera
@@ -35,19 +47,13 @@
 
       <a-entity mindar-image-target="targetIndex: 0" >
 
-        <!-- <a-gltf-model
-          src="#watch"
-          position="0 0 0"
-          scale="35 35 35">
-        </a-gltf-model> -->
-
         <a-gltf-model
-  src="#watch"
-  position="0 0 0"
-  scale="25 25 25"
-  rotation="0 0 0"
-  >
-</a-gltf-model>
+        id="mainModel"
+        src="#apple"
+        position="0 0 0"
+        scale="25 25 25"
+        rotation="0 0 0">
+      </a-gltf-model>
 
       </a-entity>
 
@@ -59,7 +65,40 @@
       </a-light>
 
     </a-scene>
-    <div style="position: fixed; bottom: 20px; width: 100%; text-align: center; z-index: 999;">
+    <div style="
+position: fixed;
+bottom: 20px;
+width: 100%;
+display: flex;
+justify-content: center;
+gap: 10px;
+z-index: 999;
+overflow-x: auto;
+padding: 10px;
+">
+
+<!-- <button onclick="changeModel('apple')">Apple</button> -->
+
+<button
+  onclick="changeModel('apple')"
+  style="
+    background: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+  ">
+  Apple
+</button>
+
+<button onclick="changeModel('casio')">Casio</button>
+
+<button onclick="changeModel('rolex')">Rolex</button>
+
+<button onclick="changeModel('tissot')">Tissot</button>
+
+</div>
+    <div style="position: fixed; bottom: 90px; width: 100%; text-align: center; z-index: 999;">
 
   <button onclick="zoomIn()">Zoom In</button>
 
@@ -73,10 +112,14 @@
 
     <script>
 
-const model = document.querySelector("a-gltf-model");
+const model = document.querySelector("#mainModel");
 
 let scale = 25;
 let rotation = 0;
+
+function changeModel(modelId) {
+  model.setAttribute("src", `#${modelId}`);
+}
 
 function zoomIn() {
   scale += 5;
@@ -86,9 +129,7 @@ function zoomIn() {
 function zoomOut() {
   scale -= 5;
 
-  if (scale < 1) {
-    scale = 1;
-  }
+  if(scale < 1) scale = 1;
 
   model.setAttribute("scale", `${scale} ${scale} ${scale}`);
 }
