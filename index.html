@@ -5,12 +5,15 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fcor/arjs-gestures/dist/gestures.js"></script>
   </head>
 
   <body>
-
+<!-- mindar-image="imageTargetSrc: ./assets/targets3.mind;" -->
     <a-scene
-      mindar-image="imageTargetSrc: ./assets/targets3.mind;"
+    mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;"
+      
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -31,11 +34,19 @@
 
       <a-entity mindar-image-target="targetIndex: 0">
 
-        <a-gltf-model
+        <!-- <a-gltf-model
           src="#watch"
           position="0 0 0"
           scale="35 35 35">
-        </a-gltf-model>
+        </a-gltf-model> -->
+
+        <a-gltf-model
+  src="#watch"
+  position="0 0 0"
+  scale="35 35 35"
+  rotation="0 0 0"
+  gesture-handler>
+</a-gltf-model>
 
       </a-entity>
 
