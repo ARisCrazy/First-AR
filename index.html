@@ -58,21 +58,21 @@
   id="casioModel"
   gltf-model="#casio"
   position="-1.5 0 0"
-  scale="1 1 1">
+  scale="0.1 0.1 0.1">
 </a-entity>
 
 <a-entity
   id="rolexModel"
   gltf-model="#rolex"
   position="1.3 0 0"
-  scale="1 1 1">
+  scale="0.1 0.1 0.1">
 </a-entity>
 
 <a-entity
   id="tissotModel"
   gltf-model="#tissot"
   position="4 0 0"
-  scale="1 1 1">
+  scale="0.1 0.1 0.1">
 </a-entity>
 </a-entity>
 
@@ -98,13 +98,14 @@ padding: 10px;
 
 <!-- <button onclick="changeModel('apple')">Apple</button> -->
 
-<button  onclick="focusModel('appleModel')">Apple</button>
 
-<button onclick="focusModel('casio')">Casio</button>
+<button onclick="focusModel('appleModel')">Apple</button>
 
-<button onclick="focusModel('rolex')">Rolex</button>
+<button onclick="focusModel('casioModel')">Casio</button>
 
-<button onclick="focusModel('tissot')">Tissot</button>
+<button onclick="focusModel('rolexModel')">Rolex</button>
+
+<button onclick="focusModel('tissotModel')">Tissot</button>
 
 </div>
     <div style="position: fixed; bottom: 90px; width: 100%; text-align: center; z-index: 999;">
@@ -143,15 +144,32 @@ function focusModel(modelId) {
 
       currentModel = el;
 
-      el.setAttribute("scale", "25 25 25");
+      if(id === "appleModel") {
+        scale = 20;
+      }
+
+      else {
+        scale = 0.15;
+      }
 
     }
 
     else {
 
-      el.setAttribute("scale", "10 10 10");
+      if(id === "appleModel") {
+        el.setAttribute("scale", "10 10 10");
+      }
+
+      else {
+        el.setAttribute("scale", "0.05 0.05 0.05");
+      }
 
     }
+
+    el.setAttribute(
+      "scale",
+      `${scale} ${scale} ${scale}`
+    );
 
   });
 
