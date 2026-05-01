@@ -99,23 +99,13 @@ padding: 10px;
 
 <!-- <button onclick="changeModel('apple')">Apple</button> -->
 
-<button
-  onclick="changeModel('apple')"
-  style="
-    background: black;
-    color: white;
-    border-radius: 20px;
-    padding: 10px 20px;
-    border: none;
-  ">
-  Apple
-</button>
+<button  onclick="focusModel('appleModel')">Apple</button>
 
-<button onclick="changeModel('casio')">Casio</button>
+<button onclick="focusModel('casio')">Casio</button>
 
-<button onclick="changeModel('rolex')">Rolex</button>
+<button onclick="focusModel('rolex')">Rolex</button>
 
-<button onclick="changeModel('tissot')">Tissot</button>
+<button onclick="focusModel('tissot')">Tissot</button>
 
 </div>
     <div style="position: fixed; bottom: 90px; width: 100%; text-align: center; z-index: 999;">
@@ -132,36 +122,86 @@ padding: 10px;
 
     <script>
 
-const model = document.querySelector("#mainModel");
+let currentModel = document.querySelector("#appleModel");
 
-let scale = 25;
+let scale = 15;
 let rotation = 0;
 
-function changeModel(modelId) {
- model.setAttribute("gltf-model", `#${modelId}`);
+function focusModel(modelId) {
+
+  const models = [
+    "appleModel",
+    "casioModel",
+    "rolexModel",
+    "tissotModel"
+  ];
+
+  models.forEach(id => {
+
+    const el = document.querySelector(`#${id}`);
+
+    if(id === modelId) {
+
+      currentModel = el;
+
+      el.setAttribute("scale", "25 25 25");
+
+    }
+
+    else {
+
+      el.setAttribute("scale", "10 10 10");
+
+    }
+
+  });
+
 }
 
 function zoomIn() {
+
   scale += 5;
-  model.setAttribute("scale", `${scale} ${scale} ${scale}`);
+
+  currentModel.setAttribute(
+    "scale",
+    `${scale} ${scale} ${scale}`
+  );
+
 }
 
 function zoomOut() {
+
   scale -= 5;
 
-  if(scale < 1) scale = 1;
+  if(scale < 5) scale = 5;
 
-  model.setAttribute("scale", `${scale} ${scale} ${scale}`);
+  currentModel.setAttribute(
+    "scale",
+    `${scale} ${scale} ${scale}`
+  );
+
 }
 
 function rotateLeft() {
+
   rotation -= 15;
-  model.setAttribute("rotation", `0 ${rotation} 0`);
+
+  currentModel.setAttribute(
+    "rotation",
+    `0 ${rotation} 0`
+  );
+
 }
 
 function rotateRight() {
+
   rotation += 15;
-  model.setAttribute("rotation", `0 ${rotation} 0`);
+
+  currentModel.setAttribute(
+    "rotation",
+    `0 ${rotation} 0`
+  );
+
 }
 
 </script>
