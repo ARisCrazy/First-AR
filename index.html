@@ -47,13 +47,13 @@
 
       <a-entity mindar-image-target="targetIndex: 0" >
 
-        <a-gltf-model
-        id="mainModel"
-        src="#apple"
-        position="0 0 0"
-        scale="25 25 25"
-        rotation="0 0 0">
-      </a-gltf-model>
+        <a-entity
+  id="mainModel"
+  gltf-model="#apple"
+  position="0 0 0"
+  scale="25 25 25"
+  rotation="0 0 0">
+</a-entity>
 
       </a-entity>
 
@@ -118,7 +118,7 @@ let scale = 25;
 let rotation = 0;
 
 function changeModel(modelId) {
-  model.setAttribute("src", `#${modelId}`);
+ model.setAttribute("gltf-model", `#${modelId}`);
 }
 
 function zoomIn() {
