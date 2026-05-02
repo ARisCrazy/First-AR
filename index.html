@@ -50,11 +50,11 @@
 <a-entity
   id="appleModel"
   gltf-model="#apple"
-  position="-4 0 0"
+  position="0 0 0"
   scale="1 1 1">
 </a-entity>
 
-<a-entity
+<!-- <a-entity
   id="casioModel"
   gltf-model="#casio"
   position="-1.5 0 0"
@@ -73,7 +73,7 @@
   gltf-model="#tissot"
   position="4 0 0"
   scale="1 1 1">
-</a-entity>
+</a-entity> -->
 </a-entity>
 
       <a-light type="ambient" intensity="1"></a-light>
@@ -99,13 +99,13 @@ padding: 10px;
 <!-- <button onclick="changeModel('apple')">Apple</button> -->
 
 
-<button onclick="focusModel('appleModel')">Apple</button>
+<button onclick="changeModel('apple')">Apple</button>
 
-<button onclick="focusModel('casioModel')">Casio</button>
+<button onclick="changeModel('casio')">Casio</button>
 
-<button onclick="focusModel('rolexModel')">Rolex</button>
+<button onclick="changeModel('rolex')">Rolex</button>
 
-<button onclick="focusModel('tissotModel')">Tissot</button>
+<button onclick="changeModel('tissot')">Tissot</button>
 
       
 
@@ -124,32 +124,44 @@ padding: 10px;
 
 <script>
 
-let currentModel = document.querySelector("#appleModel");
+const model = document.querySelector("#mainModel");
 
-let currentScale = {
-  appleModel: 20,
-  casioModel: 0.1,
-  rolexModel: 0.1,
-  tissotModel: 0.1
+let currentModel = "apple";
+
+const modelScales = {
+  apple: 0.15,
+  casio: 0.05,
+  rolex: 0.03,
+  tissot: 0.04
 };
 
-let currentRotation = 0;
+let rotation = 0;
 
-function focusModel(modelId) {
+function changeModel(modelId) {
 
-  currentModel = document.querySelector(`#${modelId}`);
+  currentModel = modelId;
+
+  model.setAttribute(
+    "gltf-model",
+    `#${modelId}`
+  );
+
+  const s = modelScales[modelId];
+
+  model.setAttribute(
+    "scale",
+    `${s} ${s} ${s}`
+  );
 
 }
 
 function zoomIn() {
 
-  const id = currentModel.id;
+  modelScales[currentModel] += 0.02;
 
-  currentScale[id] += currentScale[id] * 0.2;
+  const s = modelScales[currentModel];
 
-  const s = currentScale[id];
-
-  currentModel.setAttribute(
+  model.setAttribute(
     "scale",
     `${s} ${s} ${s}`
   );
@@ -158,17 +170,15 @@ function zoomIn() {
 
 function zoomOut() {
 
-  const id = currentModel.id;
+  modelScales[currentModel] -= 0.02;
 
-  currentScale[id] -= currentScale[id] * 0.2;
-
-  if(currentScale[id] < 0.01) {
-    currentScale[id] = 0.01;
+  if(modelScales[currentModel] < 0.01) {
+    modelScales[currentModel] = 0.01;
   }
 
-  const s = currentScale[id];
+  const s = modelScales[currentModel];
 
-  currentModel.setAttribute(
+  model.setAttribute(
     "scale",
     `${s} ${s} ${s}`
   );
@@ -177,22 +187,22 @@ function zoomOut() {
 
 function rotateLeft() {
 
-  currentRotation -= 15;
+  rotation -= 15;
 
-  currentModel.setAttribute(
+  model.setAttribute(
     "rotation",
-    `0 ${currentRotation} 0`
+    `0 ${rotation} 0`
   );
 
 }
 
 function rotateRight() {
 
-  currentRotation += 15;
+  rotation += 15;
 
-  currentModel.setAttribute(
+  model.setAttribute(
     "rotation",
-    `0 ${currentRotation} 0`
+    `0 ${rotation} 0`
   );
 
 }
