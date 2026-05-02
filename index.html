@@ -51,7 +51,7 @@
   id="appleModel"
   gltf-model="#apple"
   position="0 0 0"
-  scale="1 1 1">
+  scale="25 25 25">
 </a-entity>
 
 <!-- <a-entity
@@ -124,15 +124,16 @@ padding: 10px;
 
 <script>
 
-const model = document.querySelector("#mainModel");
+//const model = document.querySelector("#mainModel");
+const model = document.querySelector("#appleModel");
 
 let currentModel = "apple";
 
 const modelScales = {
-  apple: 0.15,
-  casio: 0.05,
-  rolex: 0.03,
-  tissot: 0.04
+  apple: 25,
+  casio: 5,
+  rolex: 5,
+  tissot: 5
 };
 
 let rotation = 0;
